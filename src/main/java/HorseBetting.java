@@ -4,7 +4,10 @@ import javax.swing.*;
 public class HorseBetting {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
+        HorseFrame frame = new HorseFrame();
+        frame.setVisible(true);
+        
+        /*JFrame frame = new JFrame();
         frame.setTitle("Horse Betting!");
 
         // Creating instance of JButton
@@ -26,6 +29,6 @@ public class HorseBetting {
         frame.setIconImage(image.getImage());
 
         // making the frame visible
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     }
 }
