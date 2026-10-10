@@ -1,15 +1,13 @@
 
-public class Screen {
-    // Instance variables for each panel;
-    
-    
-    //Open the requested panel and close all others;
-    //Start panel
-    //Menu panel
-    //Race panel
-    //Leaderboard panel
-    
-    //Open methods to open and close panels
-    
-    
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
+public class Screen extends JPanel {
+
+    private final CardLayout cardLayout;
+
+    public Screen() {
+        cardLayout = new CardLayout();
+        setLayout(cardLayout);
+    }
 }
