@@ -9,5 +9,8 @@ public class Screen extends JPanel {
     public Screen() {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
+        StartPanel startPanel = new StartPanel();
+        add(startPanel, "Start");
+        cardLayout.show(this, "Start");
     }
 }

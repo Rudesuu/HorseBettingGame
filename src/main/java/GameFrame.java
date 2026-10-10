@@ -14,5 +14,7 @@ public class GameFrame extends JFrame {
         );
 
         setIconImage(icon.getImage());
+        Screen screen = new Screen();
+        add(screen);
     }
 }
