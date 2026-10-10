@@ -12,7 +12,7 @@ public class StartPanel extends JPanel {
     public StartPanel() {
         setLayout(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("Horse Betting", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Horse betting", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 48));
         titleLabel.setBorder(new EmptyBorder(100, 0, 0, 0));
 
@@ -23,7 +23,7 @@ public class StartPanel extends JPanel {
         JLabel horseLabel = new JLabel(horseIcon);
         horseLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JButton startButton = new JButton("Start Game");
+        JButton startButton = new JButton("Start game");
         startButton.setBorder(new EmptyBorder(15, 40, 15, 40));
         startButton.setFont(new Font("Arial", Font.BOLD, 20));
         

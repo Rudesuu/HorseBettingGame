@@ -10,7 +10,11 @@ public class Screen extends JPanel {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         StartPanel startPanel = new StartPanel();
+        RaceSetupPanel raceSetupPanel = new RaceSetupPanel();
         add(startPanel, "Start");
-        cardLayout.show(this, "Start");
+        add(raceSetupPanel, "Setup");
+        //Make sure .show works correctly
+        cardLayout.show(this, "Setup");
+        //Make sure .show works correctly
     }
 }
