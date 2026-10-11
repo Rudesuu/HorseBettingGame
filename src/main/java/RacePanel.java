@@ -2,11 +2,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class RacePanel extends JPanel {
 
@@ -19,7 +20,7 @@ public class RacePanel extends JPanel {
 
         for (String lane : lanes) {
 
-            JPanel horseLane = new JPanel(new BorderLayout());
+            JPanel horseLane = new JPanel(null);
             horseLane.setBackground(new Color(196, 122, 58));
 
             ImageIcon horseIcon = new ImageIcon(
@@ -27,10 +28,18 @@ public class RacePanel extends JPanel {
             );
 
             JLabel horseLabel = new JLabel(horseIcon);
-            horseLabel.setHorizontalAlignment(JLabel.CENTER);
+            horseLabel.setSize(horseLabel.getPreferredSize());
 
-            horseLane.add(horseLabel, BorderLayout.WEST);
+            horseLane.add(horseLabel);
             trackPanel.add(horseLane);
+
+            horseLane.addComponentListener(new java.awt.event.ComponentAdapter() {
+                @Override
+                public void componentResized(java.awt.event.ComponentEvent e) {
+                    int y = (horseLane.getHeight() - horseLabel.getHeight()) / 2;
+                    horseLabel.setLocation(horseLabel.getX(), y);
+                }
+            });
         }
 
         JPanel finishPanel = new JPanel(new GridLayout(16, 3));
@@ -48,7 +57,40 @@ public class RacePanel extends JPanel {
             finishPanel.add(flag);
         }
 
+        final ImageIcon carrot = new ImageIcon(
+                getClass().getResource("/assets/WhiteHorseLowRes.png")
+        );
+        final ImageIcon waterHose = new ImageIcon(
+                getClass().getResource("/assets/WhiteHorseLowRes.png")
+        );
+
+        JButton carrotButton = new JButton(carrot);
+        carrotButton.setHorizontalAlignment(JButton.CENTER);
+        carrotButton.setText("€100");
+        carrotButton.setHorizontalTextPosition(JButton.CENTER);
+        carrotButton.setVerticalTextPosition(JButton.BOTTOM);
+        carrotButton.setFont(new Font("Arial", Font.BOLD, 18));
+
+        JButton waterHoseButton = new JButton(waterHose);
+        waterHoseButton.setHorizontalAlignment(JButton.CENTER);
+        waterHoseButton.setText("€100");
+        waterHoseButton.setHorizontalTextPosition(JButton.CENTER);
+        waterHoseButton.setVerticalTextPosition(JButton.BOTTOM);
+        waterHoseButton.setFont(new Font("Arial", Font.BOLD, 18));
+
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+        buttonPanel.add(carrotButton, BorderLayout.EAST);
+        buttonPanel.add(waterHoseButton, BorderLayout.WEST);
+        
+        JLabel balanceLabel = BalanceLabel.create();
+        
+        JPanel userPanel = new JPanel(new BorderLayout());
+        userPanel.setBackground(new Color(38, 76, 52));
+        userPanel.add(buttonPanel, BorderLayout.EAST);
+        userPanel.add(balanceLabel, BorderLayout.CENTER);
+
         add(trackPanel, BorderLayout.CENTER);
         add(finishPanel, BorderLayout.EAST);
+        add(userPanel, BorderLayout.SOUTH);
     }
 }

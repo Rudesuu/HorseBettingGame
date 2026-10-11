@@ -89,9 +89,8 @@ public class RaceSetupPanel extends JPanel {
 
         JPanel bettingPanel = new JPanel();
         bettingPanel.setLayout(new GridLayout(3, 1, 5, 5));
-
-        JLabel balanceLabel = new JLabel("Available currency: €500");
-        balanceLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        
+        JLabel balanceLabel = BalanceLabel.create();
 
         JLabel betLabel = new JLabel("Bet amount (€):");
         betLabel.setFont(new Font("Arial", Font.PLAIN, 16));
