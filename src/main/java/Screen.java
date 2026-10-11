@@ -12,11 +12,13 @@ public class Screen extends JPanel {
         StartPanel startPanel = new StartPanel();
         RaceSetupPanel raceSetupPanel = new RaceSetupPanel();
         RacePanel racePanel = new RacePanel();
+        LeaderboardPanel leaderboardPanel = new LeaderboardPanel();
         add(startPanel, "Start");
         add(raceSetupPanel, "Setup");
         add(racePanel, "Race");
+        add(leaderboardPanel, "Leaderboard");
         //Make sure .show works correctly
-        cardLayout.show(this, "Race");
+        cardLayout.show(this, "Leaderboard");
         //Make sure .show works correctly
     }
 }
