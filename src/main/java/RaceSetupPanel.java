@@ -72,7 +72,7 @@ public class RaceSetupPanel extends JPanel {
 
         JPanel startButtonPanel = new JPanel();
         startButtonPanel.add(startRaceButton);
-        startButtonPanel.setBorder(new EmptyBorder(0, 0, 10, 0));
+        startButtonPanel.setBorder(new EmptyBorder(20, 0, 0, 65));
 
         JPanel selectedHorsePanel = new JPanel();
         selectedHorsePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -102,11 +102,11 @@ public class RaceSetupPanel extends JPanel {
         bettingPanel.add(balanceLabel);
         bettingPanel.add(betLabel);
         bettingPanel.add(betField);
-        bettingPanel.setBorder(new EmptyBorder(70, 0, 0, 60));
+        bettingPanel.setBorder(new EmptyBorder(20, 0, 0, 60));
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(selectedHorsePanel, BorderLayout.WEST);
-        bottomPanel.add(startButtonPanel, BorderLayout.SOUTH);
+        bottomPanel.add(startButtonPanel, BorderLayout.CENTER);
         bottomPanel.add(bettingPanel, BorderLayout.EAST);
 
         add(bottomPanel, BorderLayout.SOUTH);
