@@ -38,9 +38,4 @@ public class Horse {
         
         return horses;
     }
-    
-    static Label createLabel(String imagePath) {
-        // TODO
-        return null;
-    }
 }
