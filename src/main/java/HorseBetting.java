@@ -1,10 +1,10 @@
-import java.io.*;
+
 import javax.swing.*;
 
 public class HorseBetting {
 
     public static void main(String[] args) {
-        HorseFrame frame = new HorseFrame();
+        GameFrame frame = new GameFrame();
         frame.setVisible(true);
         
         /*JFrame frame = new JFrame();
