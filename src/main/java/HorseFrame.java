@@ -7,6 +7,12 @@
  *
  * @author flori
  */
+
+import java.awt.Dimension;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+
 public class HorseFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(HorseFrame.class.getName());
@@ -15,8 +21,38 @@ public class HorseFrame extends javax.swing.JFrame {
      * Creates new form HorseFrame
      */
     public HorseFrame() {
-        initComponents();
-    }
+    initComponents();
+
+    horseImageStartFrame.setHorizontalAlignment(
+        javax.swing.SwingConstants.CENTER
+    );
+
+    horseImageStartFrame.setVerticalAlignment(
+        javax.swing.SwingConstants.CENTER
+    );
+
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        scaleImage(
+            horseImageStartFrame,
+            "/assets/WhiteHorseLowRes.png"
+        );
+    });
+
+    horseImageStartFrame.addComponentListener(
+        new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(
+                    java.awt.event.ComponentEvent e) {
+
+                scaleImage(
+                    horseImageStartFrame,
+                    "/assets/WhiteHorseLowRes.png"
+                );
+            }
+        }
+    );
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +67,7 @@ public class HorseFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        horseImageStartFrame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,23 +103,23 @@ public class HorseFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/WhiteHorseLowRes.png"))); // NOI18N
+        horseImageStartFrame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/WhiteHorseLowRes.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jLabel1)
-                .addContainerGap(172, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(144, Short.MAX_VALUE)
+                .addComponent(horseImageStartFrame)
+                .addGap(136, 136, 136))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(horseImageStartFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(76, 76, 76))
         );
 
         jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -96,7 +132,7 @@ public class HorseFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
         );
 
         pack();
@@ -131,14 +167,57 @@ public class HorseFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new HorseFrame().setVisible(true));
     }
     
+    private void scaleAllImages() {
+        scaleImage(horseImageStartFrame, "/assets/WhiteHorseLowRes.png");
+    }
     
-    /*private void scaleImage(JLabel label, String imagePath) {
-        ImageIcon 
-    }*/
+ private void scaleImage(javax.swing.JLabel label, String imagePath) {
+    URL url = getClass().getResource(imagePath);
+
+    if (url == null) {
+        System.out.println("Image not found: " + imagePath);
+        return;
+    }
+
+    ImageIcon original = new ImageIcon(url);
+
+    int width = label.getWidth();
+    int height = label.getHeight();
+
+    if (width <= 0 || height <= 0) {
+        return;
+    }
+
+    int imageWidth = original.getIconWidth();
+    int imageHeight = original.getIconHeight();
+
+    double scale = Math.min(
+        (double) width / imageWidth,
+        (double) height / imageHeight
+    );
+
+    int newWidth = (int) (imageWidth * scale);
+    int newHeight = (int) (imageHeight * scale);
+
+    Image scaled = original.getImage().getScaledInstance(
+        newWidth,
+        newHeight,
+        Image.SCALE_SMOOTH
+    );
+
+    label.setIcon(new ImageIcon(scaled));
+    
+    System.out.println(label.getWidth() + " x " + label.getHeight());
+
+}
+
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel horseImageStartFrame;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
