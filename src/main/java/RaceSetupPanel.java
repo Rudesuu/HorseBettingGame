@@ -22,13 +22,13 @@ public class RaceSetupPanel extends JPanel {
                 getClass().getResource("/assets/WhiteHorseLowRes.png")
         );
         final ImageIcon blackHorse = new ImageIcon(
-                getClass().getResource("/assets/WhiteHorseLowRes.png")
+                getClass().getResource("/assets/BlackHorseLowRes.png")
         );
         final ImageIcon goldenHorse = new ImageIcon(
-                getClass().getResource("/assets/WhiteHorseLowRes.png")
+                getClass().getResource("/assets/GoldeneHorseLowRes.png")
         );
         final ImageIcon diamondHorse = new ImageIcon(
-                getClass().getResource("/assets/WhiteHorseLowRes.png")
+                getClass().getResource("/assets/DiamondHorseLowRes.png")
         );
 
         JButton whiteHorseButton = new JButton(whiteHorse);

@@ -16,7 +16,8 @@ public class RacePanel extends JPanel {
 
         JPanel trackPanel = new JPanel(new GridLayout(4, 1, 0, 15));
 
-        String[] lanes = {"White horse", "Black horse", "Golden horse", "Diamond horse"};
+        String[] lanes = {"/assets/WhiteHorseLowRes.png", "/assets/BlackHorseLowRes.png",
+            "/assets/GoldenHorseLowRes.png", "/assets/DiamondHorseLowRes.png"};
 
         for (String lane : lanes) {
 
