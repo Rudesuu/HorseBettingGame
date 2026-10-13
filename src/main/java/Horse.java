@@ -1,5 +1,5 @@
 
-import java.awt.Label;
+import java.util.Random;
 
 
 public class Horse {
@@ -10,18 +10,36 @@ public class Horse {
     int chanceToSlideOut;
     boolean slidOut = false;
     long finishingTime;
-    Label label;
     
     Horse(String name, float payout, float speed, int chanceToSlideOut, String imagePath) {
         this.name = name;
         this.payout = payout;
         this.speed = speed;
         this.chanceToSlideOut = chanceToSlideOut;
-        label = createLabel(imagePath);
     }
     
     void updatePosition(double deltaTime) {
-        position += (double) speed * deltaTime;
+        position += Math.min((double) speed * deltaTime, 100);
+    }
+    
+    void updateFinished(long currentTime) {
+        if (finishingTime == -1) return;
+        if (position != 100) return;
+        
+        finishingTime = currentTime;
+    }
+    
+    void applyCarrotSpeedBoost() {
+        speed *= 1.1;
+    }
+    
+    void applyWaterHose() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(100);
+        
+        if (randomNumber >= chanceToSlideOut) return;
+        if (finishingTime != 1) return;
+        slidOut = true;
     }
     
     static Horse[] createRaceHorses() {
