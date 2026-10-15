@@ -11,7 +11,7 @@ public class Horse {
     boolean slidOut = false;
     long finishingTime;
     
-    Horse(String name, float payout, float speed, int chanceToSlideOut, String imagePath) {
+    Horse(String name, float payout, float speed, int chanceToSlideOut) {
         this.name = name;
         this.payout = payout;
         this.speed = speed;
@@ -43,10 +43,10 @@ public class Horse {
     }
     
     static Horse[] createRaceHorses() {
-        Horse whiteHorse = new Horse("White Horse", 10f, 1f, 10, "/assets/WhiteHorseLowRes.png");
-        Horse blackHorse = new Horse("Black Horse", 4.1f, 1.5f, 15, "" /* TODO */);
-        Horse goldenHorse = new Horse("Golden Horse", 1.9f, 1.75f, 25, "" /* TODO */);
-        Horse diamondHorse = new Horse("Diamond Horse", 1.1f, 2f, 40, "" /* TODO */);
+        Horse whiteHorse = new Horse("White Horse", 10f, 1f, 10);
+        Horse blackHorse = new Horse("Black Horse", 4.1f, 1.5f, 15);
+        Horse goldenHorse = new Horse("Golden Horse", 1.9f, 1.75f, 25);
+        Horse diamondHorse = new Horse("Diamond Horse", 1.1f, 2f, 40);
         
         Horse[] horses = new Horse[4];
         horses[0] = whiteHorse;
