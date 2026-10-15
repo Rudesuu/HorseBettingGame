@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 public class RaceSetupPanel extends JPanel {
 
-    public RaceSetupPanel() {
+    public RaceSetupPanel(Screen screen) {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("Prepare for the race", JLabel.CENTER);
@@ -25,7 +25,7 @@ public class RaceSetupPanel extends JPanel {
                 getClass().getResource("/assets/BlackHorseLowRes.png")
         );
         final ImageIcon goldenHorse = new ImageIcon(
-                getClass().getResource("/assets/GoldeneHorseLowRes.png")
+                getClass().getResource("/assets/GoldenHorseLowRes.png")
         );
         final ImageIcon diamondHorse = new ImageIcon(
                 getClass().getResource("/assets/DiamondHorseLowRes.png")
@@ -111,5 +111,7 @@ public class RaceSetupPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
         add(titleLabel, BorderLayout.NORTH);
         add(horsesPanel, BorderLayout.CENTER);
+        
+        startRaceButton.addActionListener(e -> screen.showRace());
     }
 }

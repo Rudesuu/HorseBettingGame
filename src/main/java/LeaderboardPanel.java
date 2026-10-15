@@ -8,18 +8,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class LeaderboardPanel extends JPanel {
 
-    public LeaderboardPanel() {
+    private DefaultTableModel tableModel;
+    private final String[] columns = {"Position", "Horse", "Finish time"};
+
+    public LeaderboardPanel(Screen screen) {
         setLayout(new BorderLayout(0, 15));
         setBackground(new java.awt.Color(232, 232, 228));
         setBorder(new EmptyBorder(15, 15, 15, 15));
 
         JLabel leaderboardLabel = new JLabel("Leaderboard", JLabel.CENTER);
         leaderboardLabel.setFont(new Font("Arial", Font.BOLD, 35));
-
-        String[] columns = {"Position", "Horse", "Finish time"};
 
         String[][] results = {
             {"1st", "Golden horse", "47.07s"},
@@ -28,7 +30,14 @@ public class LeaderboardPanel extends JPanel {
             {"4th", "Diamond horse", "DNF"}
         };
 
-        JTable resultsTable = new JTable(results, columns);
+        tableModel = new DefaultTableModel(results, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        JTable resultsTable = new JTable(tableModel);
         resultsTable.setRowHeight(60);
         resultsTable.setFont(new Font("Arial", Font.PLAIN, 40));
         resultsTable.getTableHeader().setPreferredSize(
@@ -56,6 +65,12 @@ public class LeaderboardPanel extends JPanel {
         add(leaderboardLabel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         add(labelButtonPanel, BorderLayout.SOUTH);
-    }
-}
 
+        nextButton.addActionListener(e -> screen.showSetup());
+    }
+
+    public void updateResults(String[][] results) {
+        tableModel.setDataVector(results, columns);
+    }
+
+}

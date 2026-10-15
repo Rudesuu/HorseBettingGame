@@ -10,14 +10,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RacePanel extends JPanel {
+    
+    // array PlayerData.race.horses
+    JLabel[] horseLabels;
+    //map
 
-    public RacePanel() {
+    public RacePanel(Screen screen) {
         setLayout(new BorderLayout());
 
         JPanel trackPanel = new JPanel(new GridLayout(4, 1, 0, 15));
 
         String[] lanes = {"/assets/WhiteHorseLowRes.png", "/assets/BlackHorseLowRes.png",
             "/assets/GoldenHorseLowRes.png", "/assets/DiamondHorseLowRes.png"};
+        
+        //horseLabels = new JLabel[4];
 
         for (String lane : lanes) {
 
@@ -25,11 +31,13 @@ public class RacePanel extends JPanel {
             horseLane.setBackground(new Color(196, 122, 58));
 
             ImageIcon horseIcon = new ImageIcon(
-                    getClass().getResource("/assets/WhiteHorseLowRes.png")
+                    getClass().getResource(lane)
             );
 
             JLabel horseLabel = new JLabel(horseIcon);
             horseLabel.setSize(horseLabel.getPreferredSize());
+            
+            //horseLabels[horseLabels.length] = horseLabel;
 
             horseLane.add(horseLabel);
             trackPanel.add(horseLane);
@@ -59,10 +67,10 @@ public class RacePanel extends JPanel {
         }
 
         final ImageIcon carrot = new ImageIcon(
-                getClass().getResource("/assets/WhiteHorseLowRes.png")
+                getClass().getResource("/assets/CarrotLowRes.png")
         );
         final ImageIcon waterHose = new ImageIcon(
-                getClass().getResource("/assets/WhiteHorseLowRes.png")
+                getClass().getResource("/assets/WaterHoseLowRes.png")
         );
 
         JButton carrotButton = new JButton(carrot);

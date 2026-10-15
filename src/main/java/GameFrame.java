@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
+    static Screen screen;
+    
     public GameFrame() {
         setTitle("Horse Betting");
         setSize(1000, 700);
@@ -14,7 +16,7 @@ public class GameFrame extends JFrame {
         );
 
         setIconImage(icon.getImage());
-        Screen screen = new Screen();
+        screen = new Screen();
         add(screen);
     }
 }
