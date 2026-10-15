@@ -1,14 +1,23 @@
 
+import java.util.Arrays;
+
+
 public class Race {
     static final int UPDATES_PER_SECOND = 100;
-    private static final double UPDATE_TIME = 1_000_000_000.0 / UPDATES_PER_SECOND;
+    static final double UPDATE_TIME = 1_000_000_000.0 / UPDATES_PER_SECOND;
+    
+    static final int CARROT_COST = 75;
+    static final int WATERHOSE_COST = 125;
+    
+    int bettedEuros;
     
     Horse[] horses;
     long startTime = -1;
     long finishingTime = -1;
     boolean wet = false;
     
-    Race() {
+    Race(int bettedEuros) {
+        this.bettedEuros = bettedEuros;
         this.horses = Horse.createRaceHorses();
     }
     
@@ -25,7 +34,7 @@ public class Race {
             lastTime = currentTime;
             
             // ITERATION
-            Iteration(currentTime, deltaTime);
+            iteration(currentTime, deltaTime);
             
             long elapsed = System.nanoTime() - currentTime;
             long sleepTime = (long) UPDATE_TIME - elapsed;
@@ -44,7 +53,7 @@ public class Race {
         }
     }
     
-    void Iteration(long currentTime, double deltaTime) {
+    void iteration(long currentTime, double deltaTime) {
         for (Horse horse : horses) {
             horse.updatePosition(deltaTime);
             horse.updateFinished(currentTime);
@@ -53,6 +62,11 @@ public class Race {
         long finishingTime = checkAllHorsesFinished();
         if (finishingTime != -1) {
             this.finishingTime = finishingTime;
+            // GameFrame.screen.showLeaderboard();
+            Horse[] sortedHorses = getSortedHorsesOnFinishingTime();
+            if (sortedHorses[0] == PlayerData.getHorseObject()) {
+                givePayout();
+            }
         }
     }
     
@@ -75,5 +89,42 @@ public class Race {
         }
         
         return slowestTime;
+    }
+    
+    void purchaseCarrot() {
+        if (PlayerData.euros < CARROT_COST) return;
+        Horse horse = PlayerData.getHorseObject();
+        PlayerData.euros -= CARROT_COST;
+        horse.applyCarrotSpeedBoost();
+    }
+    
+    void purchaseWaterHose() {
+        if (PlayerData.euros < WATERHOSE_COST) return;
+        PlayerData.euros -= WATERHOSE_COST;
+        applyWaterHose();
+    }
+    
+    Horse[] getSortedHorsesOnFinishingTime() {
+        Horse[] sortedHorses = horses.clone();
+        
+        Arrays.sort(sortedHorses, (h1, h2) -> {
+            if (h1.finishingTime == -1 && h2.finishingTime == -1) {
+                return 0;
+            }
+            if (h1.finishingTime == -1) {
+                return 1;
+            }
+            if (h2.finishingTime == -1) {
+                return -1;
+            }
+
+            return Long.compare(h1.finishingTime, h2.finishingTime);
+        });
+
+        return sortedHorses;
+    }
+    
+    void givePayout() {
+        PlayerData.euros += bettedEuros * PlayerData.getHorseObject().payout;
     }
 }

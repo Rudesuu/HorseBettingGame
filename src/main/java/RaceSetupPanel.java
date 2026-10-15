@@ -25,7 +25,7 @@ public class RaceSetupPanel extends JPanel {
                 getClass().getResource("/assets/BlackHorseLowRes.png")
         );
         final ImageIcon goldenHorse = new ImageIcon(
-                getClass().getResource("/assets/GoldeneHorseLowRes.png")
+                getClass().getResource("/assets/GoldenHorseLowRes.png")
         );
         final ImageIcon diamondHorse = new ImageIcon(
                 getClass().getResource("/assets/DiamondHorseLowRes.png")
