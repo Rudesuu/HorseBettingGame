@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 public class RaceSetupPanel extends JPanel {
 
-    public RaceSetupPanel() {
+    public RaceSetupPanel(Screen screen) {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("Prepare for the race", JLabel.CENTER);
@@ -111,5 +111,7 @@ public class RaceSetupPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
         add(titleLabel, BorderLayout.NORTH);
         add(horsesPanel, BorderLayout.CENTER);
+        
+        startRaceButton.addActionListener(e -> screen.showRace());
     }
 }

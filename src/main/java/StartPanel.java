@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 public class StartPanel extends JPanel {
 
-    public StartPanel() {
+    public StartPanel(Screen screen) {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("Horse betting", JLabel.CENTER);
@@ -34,6 +34,8 @@ public class StartPanel extends JPanel {
         add(titleLabel, BorderLayout.NORTH);
         add(horseLabel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+        
+        startButton.addActionListener(e -> screen.showSetup());
     }
 
 }
