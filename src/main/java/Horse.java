@@ -9,7 +9,7 @@ public class Horse {
     float speed; // in percentage of screen's width per second
     int chanceToSlideOut;
     boolean slidOut = false;
-    long finishingTime;
+    long finishingTime = -1;
 
     Horse(String name, float payout, float speed, int chanceToSlideOut) {
         this.name = name;
@@ -23,13 +23,13 @@ public class Horse {
     }
 
     void updateFinished(long currentTime) {
-        if (finishingTime == -1) {
+        if (finishingTime != -1) {
             return;
         }
-        if (position != 100) {
+        if (position < 100) {
             return;
         }
-
+        
         finishingTime = currentTime;
     }
 

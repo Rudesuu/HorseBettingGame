@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class RaceSetupPanel extends JPanel {
@@ -112,6 +113,17 @@ public class RaceSetupPanel extends JPanel {
         add(titleLabel, BorderLayout.NORTH);
         add(horsesPanel, BorderLayout.CENTER);
 
-        startRaceButton.addActionListener(e -> screen.showRace());
+        startRaceButton.addActionListener(e -> {
+            PlayerData.race = new Race(50);
+            screen.prepareRace();
+
+            SwingUtilities.invokeLater(() -> {
+                Thread raceThread = new Thread(() -> {
+                    PlayerData.race.startRace();
+                });
+
+                raceThread.start();
+            });
+        });
     }
 }

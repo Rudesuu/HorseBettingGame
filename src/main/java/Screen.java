@@ -52,5 +52,6 @@ public class Screen extends JPanel {
         racePanel.resetHorsePositions();
         racePanel.updateHorsePositions();
         showRace();
+        racePanel.startMovement();
     }
 }

@@ -10,11 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class RacePanel extends JPanel {
 
     JLabel[] horseLabels;
     private Map<Horse, JLabel> horseLabelMap = new HashMap<>();
+    private Timer raceTimer;
 
     public RacePanel(Screen screen) {
         setLayout(new BorderLayout());
@@ -133,6 +135,15 @@ public class RacePanel extends JPanel {
 
             horseLabel.setLocation(x, horseLabel.getY());
         }
+    }
+    
+    public void startMovement() {
+        if (raceTimer != null && raceTimer.isRunning()) {
+            return;
+        }
+        
+        raceTimer = new Timer(10, e -> updateHorsePositions());
+        raceTimer.start();
     }
 
 }
