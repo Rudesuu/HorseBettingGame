@@ -89,7 +89,7 @@ public class RaceSetupPanel extends JPanel {
 
         JPanel bettingPanel = new JPanel();
         bettingPanel.setLayout(new GridLayout(3, 1, 5, 5));
-        
+
         JLabel balanceLabel = BalanceLabel.create();
 
         JLabel betLabel = new JLabel("Bet amount (€):");
@@ -111,7 +111,7 @@ public class RaceSetupPanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
         add(titleLabel, BorderLayout.NORTH);
         add(horsesPanel, BorderLayout.CENTER);
-        
+
         startRaceButton.addActionListener(e -> screen.showRace());
     }
 }

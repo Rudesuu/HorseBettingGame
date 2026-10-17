@@ -6,7 +6,7 @@ public class HorseBetting {
     public static void main(String[] args) {
         GameFrame frame = new GameFrame();
         frame.setVisible(true);
-        
+
         /*JFrame frame = new JFrame();
         frame.setTitle("Horse Betting!");
 

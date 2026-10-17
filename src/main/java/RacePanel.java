@@ -4,16 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RacePanel extends JPanel {
-    
-    // array PlayerData.race.horses
+
     JLabel[] horseLabels;
-    //map
+    private Map<Horse, JLabel> horseLabelMap = new HashMap<>();
 
     public RacePanel(Screen screen) {
         setLayout(new BorderLayout());
@@ -22,22 +23,23 @@ public class RacePanel extends JPanel {
 
         String[] lanes = {"/assets/WhiteHorseLowRes.png", "/assets/BlackHorseLowRes.png",
             "/assets/GoldenHorseLowRes.png", "/assets/DiamondHorseLowRes.png"};
-        
-        //horseLabels = new JLabel[4];
 
-        for (String lane : lanes) {
+        horseLabels = new JLabel[4];
+
+        for (int i = 0; i < 4; i++) {
 
             JPanel horseLane = new JPanel(null);
             horseLane.setBackground(new Color(196, 122, 58));
 
             ImageIcon horseIcon = new ImageIcon(
-                    getClass().getResource(lane)
+                    getClass().getResource(lanes[i])
             );
 
             JLabel horseLabel = new JLabel(horseIcon);
             horseLabel.setSize(horseLabel.getPreferredSize());
-            
-            //horseLabels[horseLabels.length] = horseLabel;
+
+            horseLabels[i] = horseLabel;
+            horseLabel.setLocation(0, 0);
 
             horseLane.add(horseLabel);
             trackPanel.add(horseLane);
@@ -90,9 +92,9 @@ public class RacePanel extends JPanel {
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.add(carrotButton, BorderLayout.EAST);
         buttonPanel.add(waterHoseButton, BorderLayout.WEST);
-        
+
         JLabel balanceLabel = BalanceLabel.create();
-        
+
         JPanel userPanel = new JPanel(new BorderLayout());
         userPanel.setBackground(new Color(38, 76, 52));
         userPanel.add(buttonPanel, BorderLayout.EAST);
@@ -102,4 +104,35 @@ public class RacePanel extends JPanel {
         add(finishPanel, BorderLayout.EAST);
         add(userPanel, BorderLayout.SOUTH);
     }
+
+    public void mapHorsesToLabels() {
+        horseLabelMap.clear();
+
+        Horse[] horses = PlayerData.race.horses;
+
+        for (int i = 0; i < horses.length; i++) {
+            horseLabelMap.put(horses[i], horseLabels[i]);
+        }
+    }
+
+    public void resetHorsePositions() {
+        for (JLabel horseLabel : horseLabels) {
+            horseLabel.setLocation(0, horseLabel.getY());
+        }
+    }
+
+    public void updateHorsePositions() {
+        for (Horse horse : horseLabelMap.keySet()) {
+            JLabel horseLabel = horseLabelMap.get(horse);
+
+            int laneWidth = horseLabel.getParent().getWidth();
+            int farthestPosition = laneWidth - horseLabel.getWidth();
+
+            double position = Math.max(0, Math.min(100, horse.position));
+            int x = (int) (position / 100.0 * farthestPosition);
+
+            horseLabel.setLocation(x, horseLabel.getY());
+        }
+    }
+
 }

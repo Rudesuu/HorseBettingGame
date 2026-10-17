@@ -1,8 +1,8 @@
 
 import java.util.Random;
 
-
 public class Horse {
+
     String name;
     float payout;
     double position = 0; // in percentage of screen's width
@@ -10,50 +10,58 @@ public class Horse {
     int chanceToSlideOut;
     boolean slidOut = false;
     long finishingTime;
-    
+
     Horse(String name, float payout, float speed, int chanceToSlideOut) {
         this.name = name;
         this.payout = payout;
         this.speed = speed;
         this.chanceToSlideOut = chanceToSlideOut;
     }
-    
+
     void updatePosition(double deltaTime) {
         position += Math.min((double) speed * deltaTime, 100);
     }
-    
+
     void updateFinished(long currentTime) {
-        if (finishingTime == -1) return;
-        if (position != 100) return;
-        
+        if (finishingTime == -1) {
+            return;
+        }
+        if (position != 100) {
+            return;
+        }
+
         finishingTime = currentTime;
     }
-    
+
     void applyCarrotSpeedBoost() {
         speed *= 1.1;
     }
-    
+
     void applyWaterHose() {
         Random random = new Random();
         int randomNumber = random.nextInt(100);
-        
-        if (randomNumber >= chanceToSlideOut) return;
-        if (finishingTime != 1) return;
+
+        if (randomNumber >= chanceToSlideOut) {
+            return;
+        }
+        if (finishingTime != 1) {
+            return;
+        }
         slidOut = true;
     }
-    
+
     static Horse[] createRaceHorses() {
         Horse whiteHorse = new Horse("White Horse", 10f, 1f, 10);
         Horse blackHorse = new Horse("Black Horse", 4.1f, 1.5f, 15);
         Horse goldenHorse = new Horse("Golden Horse", 1.9f, 1.75f, 25);
         Horse diamondHorse = new Horse("Diamond Horse", 1.1f, 2f, 40);
-        
+
         Horse[] horses = new Horse[4];
         horses[0] = whiteHorse;
         horses[1] = blackHorse;
         horses[2] = goldenHorse;
         horses[3] = diamondHorse;
-        
+
         return horses;
     }
 }

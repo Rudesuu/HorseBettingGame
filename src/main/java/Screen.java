@@ -6,13 +6,14 @@ public class Screen extends JPanel {
 
     private final CardLayout cardLayout;
     private final LeaderboardPanel leaderboardPanel;
+    private final RacePanel racePanel;
 
     public Screen() {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         StartPanel startPanel = new StartPanel(this);
         RaceSetupPanel raceSetupPanel = new RaceSetupPanel(this);
-        RacePanel racePanel = new RacePanel(this);
+        racePanel = new RacePanel(this);
         leaderboardPanel = new LeaderboardPanel(this);
         add(startPanel, "Start");
         add(raceSetupPanel, "Setup");
@@ -20,7 +21,7 @@ public class Screen extends JPanel {
         add(leaderboardPanel, "Leaderboard");
     }
 
-    void ShowStart() {
+    void showStart() {
         cardLayout.show(this, "Start");
     }
 
@@ -40,9 +41,16 @@ public class Screen extends JPanel {
             {"4th", "Diamond horse", "DNF"}
         };
     }
-    
+
     void showLeaderboard(String[][] results) {
-        leaderboardPanel.updateResults(results);    
+        leaderboardPanel.updateResults(results);
         cardLayout.show(this, "Leaderboard");
+    }
+
+    void prepareRace() {
+        racePanel.mapHorsesToLabels();
+        racePanel.resetHorsePositions();
+        racePanel.updateHorsePositions();
+        showRace();
     }
 }
