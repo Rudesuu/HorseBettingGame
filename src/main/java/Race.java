@@ -63,13 +63,12 @@ public class Race {
         if (finishingTime != -1) {
             this.finishingTime = finishingTime;
 
-            GameFrame.screen.showLeaderboard(new String[][]{
-                {"1st", "Golden horse", "47.07s"},
-                {"2nd", "Black horse", "53.87s"},
-                {"3rd", "White horse", "62.34s"},
-                {"4th", "Diamond horse", "DNF"}
-            });
-
+            //GameFrame.screen.showLeaderboard(new String[][]{
+            //{"1st", "Golden horse", "47.07s"},
+            //{"2nd", "Black horse", "53.87s"},
+            //{"3rd", "White horse", "62.34s"},
+            //{"4th", "Diamond horse", "DNF"}
+            //});
             Horse[] sortedHorses = getSortedHorsesOnFinishingTime();
             if (sortedHorses[0] == PlayerData.getHorseObject()) {
                 givePayout();

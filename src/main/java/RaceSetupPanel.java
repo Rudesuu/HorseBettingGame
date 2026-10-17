@@ -135,7 +135,7 @@ public class RaceSetupPanel extends JPanel {
                 );
                 return;
             }
-
+            
             PlayerData.race = new Race(bet);
             PlayerData.euros -= bet;
             BalanceLabel.updateMoney(balanceLabel);
