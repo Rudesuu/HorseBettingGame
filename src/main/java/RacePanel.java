@@ -17,6 +17,7 @@ public class RacePanel extends JPanel {
     JLabel[] horseLabels;
     private Map<Horse, JLabel> horseLabelMap = new HashMap<>();
     private Timer raceTimer;
+    private JLabel balanceLabel;
 
     public RacePanel(Screen screen) {
         setLayout(new BorderLayout());
@@ -95,7 +96,7 @@ public class RacePanel extends JPanel {
         buttonPanel.add(carrotButton, BorderLayout.EAST);
         buttonPanel.add(waterHoseButton, BorderLayout.WEST);
 
-        JLabel balanceLabel = BalanceLabel.create();
+        balanceLabel = BalanceLabel.create();
 
         JPanel userPanel = new JPanel(new BorderLayout());
         userPanel.setBackground(new Color(38, 76, 52));
@@ -136,12 +137,14 @@ public class RacePanel extends JPanel {
             horseLabel.setLocation(x, horseLabel.getY());
         }
     }
-    
+
     public void startMovement() {
         if (raceTimer != null && raceTimer.isRunning()) {
             return;
         }
-        
+
+        BalanceLabel.updateMoney(balanceLabel);
+
         raceTimer = new Timer(10, e -> updateHorsePositions());
         raceTimer.start();
     }

@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class RaceSetupPanel extends JPanel {
@@ -81,9 +80,29 @@ public class RaceSetupPanel extends JPanel {
         JLabel selectedTitle = new JLabel("Your selected horse:");
         selectedTitle.setFont(new Font("Arial", Font.BOLD, 18));
 
-        //This should change according to the selected horse
         JLabel selectedHorseName = new JLabel("Diamond horse");
         selectedHorseName.setFont(new Font("Arial", Font.PLAIN, 18));
+        PlayerData.chosenHorse = "Diamond Horse";
+
+        whiteHorseButton.addActionListener(e -> {
+            selectedHorseName.setText("White horse");
+            PlayerData.chosenHorse = "White Horse";
+        });
+
+        blackHorseButton.addActionListener(e -> {
+            selectedHorseName.setText("Black horse");
+            PlayerData.chosenHorse = "Black Horse";
+        });
+
+        goldenHorseButton.addActionListener(e -> {
+            selectedHorseName.setText("Golden horse");
+            PlayerData.chosenHorse = "Golden Horse";
+        });
+
+        diamondHorseButton.addActionListener(e -> {
+            selectedHorseName.setText("Diamond horse");
+            PlayerData.chosenHorse = "Diamond Horse";
+        });
 
         selectedHorsePanel.add(selectedTitle);
         selectedHorsePanel.add(selectedHorseName);
@@ -114,16 +133,42 @@ public class RaceSetupPanel extends JPanel {
         add(horsesPanel, BorderLayout.CENTER);
 
         startRaceButton.addActionListener(e -> {
-            PlayerData.race = new Race(50);
+            int bet;
+
+            try {
+                bet = Integer.parseInt(betField.getText().trim());
+            } catch (NumberFormatException ex) {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this, "Please enter a valid whole number."
+                );
+                return;
+            }
+
+            if (bet <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this, "Your bet must be greater than zero."
+                );
+                return;
+            }
+
+            if (bet > PlayerData.euros) {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this, "You don't have enough money for that bet."
+                );
+                return;
+            }
+
+            PlayerData.race = new Race(bet);
+            PlayerData.euros -= bet;
+            BalanceLabel.updateMoney(balanceLabel);
+
             screen.prepareRace();
 
-            SwingUtilities.invokeLater(() -> {
-                Thread raceThread = new Thread(() -> {
-                    PlayerData.race.startRace();
-                });
-
-                raceThread.start();
+            Thread raceThread = new Thread(() -> {
+                PlayerData.race.startRace();
             });
+
+            raceThread.start();
         });
     }
 }
