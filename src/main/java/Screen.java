@@ -7,12 +7,13 @@ public class Screen extends JPanel {
     private final CardLayout cardLayout;
     private final LeaderboardPanel leaderboardPanel;
     private final RacePanel racePanel;
+    private final RaceSetupPanel raceSetupPanel;
 
     public Screen() {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         StartPanel startPanel = new StartPanel(this);
-        RaceSetupPanel raceSetupPanel = new RaceSetupPanel(this);
+        raceSetupPanel = new RaceSetupPanel(this);
         racePanel = new RacePanel(this);
         leaderboardPanel = new LeaderboardPanel(this);
         add(startPanel, "Start");
@@ -21,12 +22,9 @@ public class Screen extends JPanel {
         add(leaderboardPanel, "Leaderboard");
     }
 
-    void showStart() {
-        cardLayout.show(this, "Start");
-    }
-
     void showSetup() {
         cardLayout.show(this, "Setup");
+        raceSetupPanel.refreshBalance();
     }
 
     void showRace() {

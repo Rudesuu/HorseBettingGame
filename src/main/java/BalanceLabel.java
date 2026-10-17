@@ -12,9 +12,9 @@ public class BalanceLabel {
         balanceLabel.setForeground(Color.ORANGE);
         return balanceLabel;
     }
-    
+
     public static void updateMoney(JLabel balanceLabel) {
-    balanceLabel.setText("Available currency: €" + PlayerData.euros);
-}
-    
+        balanceLabel.setText("Available currency: €" + PlayerData.euros);
+    }
+
 }

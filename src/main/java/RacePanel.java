@@ -139,13 +139,17 @@ public class RacePanel extends JPanel {
     }
 
     public void startMovement() {
-        if (raceTimer != null && raceTimer.isRunning()) {
-            return;
+        if (raceTimer != null) {
+            raceTimer.stop();
         }
 
         BalanceLabel.updateMoney(balanceLabel);
 
-        raceTimer = new Timer(10, e -> updateHorsePositions());
+        raceTimer = new Timer(10, e -> {
+            updateHorsePositions();
+            BalanceLabel.updateMoney(balanceLabel);
+        });
+        
         raceTimer.start();
     }
 
