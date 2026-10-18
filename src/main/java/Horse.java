@@ -44,7 +44,7 @@ public class Horse {
         if (randomNumber >= chanceToSlideOut) {
             return;
         }
-        if (finishingTime != 1) {
+        if (finishingTime != -1) {
             return;
         }
         slidOut = true;

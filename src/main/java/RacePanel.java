@@ -80,17 +80,31 @@ public class RacePanel extends JPanel {
 
         JButton carrotButton = new JButton(carrot);
         carrotButton.setHorizontalAlignment(JButton.CENTER);
-        carrotButton.setText("€100");
+        carrotButton.setText("€75");
         carrotButton.setHorizontalTextPosition(JButton.CENTER);
         carrotButton.setVerticalTextPosition(JButton.BOTTOM);
         carrotButton.setFont(new Font("Arial", Font.BOLD, 18));
 
         JButton waterHoseButton = new JButton(waterHose);
         waterHoseButton.setHorizontalAlignment(JButton.CENTER);
-        waterHoseButton.setText("€100");
+        waterHoseButton.setText("€125");
         waterHoseButton.setHorizontalTextPosition(JButton.CENTER);
         waterHoseButton.setVerticalTextPosition(JButton.BOTTOM);
         waterHoseButton.setFont(new Font("Arial", Font.BOLD, 18));
+
+        carrotButton.addActionListener(e -> {
+            if (PlayerData.race != null) {
+                PlayerData.race.purchaseCarrot();
+                BalanceLabel.updateMoney(balanceLabel);
+            }
+        });
+
+        waterHoseButton.addActionListener(e -> {
+            if (PlayerData.race != null) {
+                PlayerData.race.purchaseWaterHose();
+                BalanceLabel.updateMoney(balanceLabel);
+            }
+        });
 
         JPanel buttonPanel = new JPanel(new BorderLayout());
         buttonPanel.add(carrotButton, BorderLayout.EAST);
@@ -121,12 +135,18 @@ public class RacePanel extends JPanel {
     public void resetHorsePositions() {
         for (JLabel horseLabel : horseLabels) {
             horseLabel.setLocation(0, horseLabel.getY());
+            horseLabel.setVisible(true);
         }
     }
 
     public void updateHorsePositions() {
         for (Horse horse : horseLabelMap.keySet()) {
             JLabel horseLabel = horseLabelMap.get(horse);
+
+            if (horse.slidOut) {
+                horseLabel.setVisible(false);
+                continue;
+            }
 
             int laneWidth = horseLabel.getParent().getWidth();
             int farthestPosition = laneWidth - horseLabel.getWidth();
@@ -149,7 +169,7 @@ public class RacePanel extends JPanel {
             updateHorsePositions();
             BalanceLabel.updateMoney(balanceLabel);
         });
-        
+
         raceTimer.start();
     }
 
