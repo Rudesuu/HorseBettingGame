@@ -8,8 +8,6 @@ public final class PlayerData {
 
     private PlayerData() {
     }
-
-    ;
     
     void startNewRace(int bettedEuros) {
         if (race != null && race.finishingTime == -1) {
