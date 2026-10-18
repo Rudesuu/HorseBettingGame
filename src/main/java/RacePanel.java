@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 public class RacePanel extends JPanel {
 
-    JLabel[] horseLabels;
+    private JLabel[] horseLabels;
     private Map<Horse, JLabel> horseLabelMap = new HashMap<>();
     private Timer raceTimer;
     private JLabel balanceLabel;

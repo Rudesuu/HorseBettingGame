@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -75,7 +76,9 @@ public class LeaderboardPanel extends JPanel {
     }
 
     public void updateNetEarnings(int earnings) {
-        netEarningsLabel.setText("Net earnings: €" + earnings);
+        SwingUtilities.invokeLater(() -> {
+            netEarningsLabel.setText("Net earnings: €" + earnings);
+        });
     }
 
 }

@@ -1,6 +1,7 @@
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class Screen extends JPanel {
 
@@ -31,18 +32,11 @@ public class Screen extends JPanel {
         cardLayout.show(this, "Race");
     }
 
-    String[][] getTestResults() {
-        return new String[][]{
-            {"1st", "Golden horse", "47.07s"},
-            {"2nd", "Black horse", "53.87s"},
-            {"3rd", "White horse", "62.34s"},
-            {"4th", "Diamond horse", "DNF"}
-        };
-    }
-
     void showLeaderboard(String[][] results) {
-        leaderboardPanel.updateResults(results);
-        cardLayout.show(this, "Leaderboard");
+        SwingUtilities.invokeLater(() -> {
+            leaderboardPanel.updateResults(results);
+            cardLayout.show(this, "Leaderboard");
+        });
     }
 
     void prepareRace() {
