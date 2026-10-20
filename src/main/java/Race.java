@@ -121,12 +121,8 @@ public class Race {
                 results[i][3] = stats.convertedFastestTime;
                 results[i][4] = Integer.toString(stats.wins);
             }
-
-            GameFrame.screen.showLeaderboard(results);
-
-            if (sortedHorses[0] == PlayerData.getHorseObject() && finishingTime != -2) {
-                givePayout();
-            }
+            
+            GameFrame.screen.showLeaderboard(results, givePayout(sortedHorses[0]));
         }
     }
 
@@ -195,7 +191,12 @@ public class Race {
         return sortedHorses;
     }
 
-    void givePayout() {
-        PlayerData.euros += bettedEuros * PlayerData.getHorseObject().payout;
+    float givePayout(Horse firstHorse) {
+        float earnings = 0;
+        if (firstHorse == PlayerData.getHorseObject() && finishingTime != -2) {
+            earnings = bettedEuros * PlayerData.getHorseObject().payout;
+            PlayerData.euros += earnings;
+        }
+        return earnings - bettedEuros;
     }
 }

@@ -12,6 +12,8 @@ public final class PlayerData {
 
     static int euros = 200;
     static String chosenHorse;
+    
+    static Map<String, HorseStats> statsPerHorse = new HashMap();
 
     static Race race;
 
