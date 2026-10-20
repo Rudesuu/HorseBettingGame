@@ -1,6 +1,10 @@
 
+import java.awt.event.*;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 public class GameFrame extends JFrame {
 
@@ -18,5 +22,22 @@ public class GameFrame extends JFrame {
         setIconImage(icon.getImage());
         screen = new Screen();
         add(screen);
+        
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(
+            KeyEvent.VK_S,
+            InputEvent.CTRL_DOWN_MASK
+        );
+
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+            .put(keyStroke, "save");
+
+        getRootPane().getActionMap().put("save", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    PlayerData.save();
+                } catch (Exception ex) {}
+            }
+        });
     }
 }
