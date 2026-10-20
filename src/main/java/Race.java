@@ -122,7 +122,7 @@ public class Race {
                 results[i][4] = Integer.toString(stats.wins);
             }
             
-            GameFrame.screen.showLeaderboard(results, givePayout(sortedHorses[0]));
+            GameFrame.screen.showLeaderboard(results, (int) givePayout(sortedHorses[0]));
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public final class PlayerData {
 
-    static int euros = 200;
+    static int euros = 500;
     static String chosenHorse;
     
     static Map<String, HorseStats> statsPerHorse = new HashMap();
