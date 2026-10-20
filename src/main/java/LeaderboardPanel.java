@@ -7,13 +7,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class LeaderboardPanel extends JPanel {
 
     private DefaultTableModel tableModel;
-    private final String[] columns = {"Position", "Horse", "Finish time"};
+    private final String[] columns = {"Position", "Horse", "Finish time",
+        "Fastest time", "Win count"};
+    private JLabel netEarningsLabel;
 
     public LeaderboardPanel(Screen screen) {
         setLayout(new BorderLayout(0, 15));
@@ -23,12 +26,7 @@ public class LeaderboardPanel extends JPanel {
         JLabel leaderboardLabel = new JLabel("Leaderboard", JLabel.CENTER);
         leaderboardLabel.setFont(new Font("Arial", Font.BOLD, 35));
 
-        String[][] results = {
-            {"1st", "Golden horse", "47.07s"},
-            {"2nd", "Black horse", "53.87s"},
-            {"3rd", "White horse", "62.34s"},
-            {"4th", "Diamond horse", "DNF"}
-        };
+        String[][] results = new String[4][5];
 
         tableModel = new DefaultTableModel(results, columns) {
             @Override
@@ -48,7 +46,7 @@ public class LeaderboardPanel extends JPanel {
         );
         resultsTable.setBackground(new java.awt.Color(232, 232, 228));
 
-        JLabel netEarningsLabel = new JLabel("Net earnings: €225");
+        netEarningsLabel = new JLabel("Net earnings: €0");
         netEarningsLabel.setFont(new Font("Arial", Font.BOLD, 30));
 
         JButton nextButton = new JButton("Next");
@@ -71,6 +69,12 @@ public class LeaderboardPanel extends JPanel {
 
     public void updateResults(String[][] results) {
         tableModel.setDataVector(results, columns);
+    }
+
+    public void updateNetEarnings(int earnings) {
+        SwingUtilities.invokeLater(() -> {
+            netEarningsLabel.setText("Net earnings: €" + earnings);
+        });
     }
 
 }

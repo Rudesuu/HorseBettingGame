@@ -10,33 +10,41 @@ import java.util.Map;
 
 
 public final class PlayerData {
-    static int euros = 100;
+
+    static int euros = 200;
     static String chosenHorse;
-    
-    static Map<String, HorseStats> statsPerHorse = new HashMap<>();
-    
+
     static Race race;
-    
-    private PlayerData() {};
-    
-    static void startNewRace(int bettedEuros) {
-        if (race != null && race.finishingTime == -1) return;
-        if (bettedEuros > euros) return;
-        PlayerData.euros -= bettedEuros;
-        
-        race = new Race(bettedEuros);
-        
-        race.startRace();
+
+    private PlayerData() {
     }
     
+    void startNewRace(int bettedEuros) {
+        if (race != null && race.finishingTime == -1) {
+            return;
+        }
+        if (bettedEuros > euros) {
+            return;
+        }
+        PlayerData.euros -= bettedEuros;
+
+        race = new Race(bettedEuros);
+
+        race.startRace();
+    }
+
     static Horse getHorseObject() {
-        if (race == null) return null;
-        
+        if (race == null) {
+            return null;
+        }
+
         for (Horse horse : race.horses) {
-            if (!horse.name.equals(chosenHorse)) continue;
+            if (!horse.name.equals(chosenHorse)) {
+                continue;
+            }
             return horse;
         }
-        
+
         return null;
     }
     
