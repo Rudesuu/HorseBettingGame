@@ -3,6 +3,7 @@ A horse racing game made with Java Swing.
 
 ## Requirements
 - Apache NetBeans (JDK 26)
+- Dependency: Gson 2.13.2 (declared in pom.xml)
 
 ## Build and run with Apache NetBeans
 1. Unzip the submission.
