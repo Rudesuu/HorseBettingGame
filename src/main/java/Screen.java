@@ -32,9 +32,10 @@ public class Screen extends JPanel {
         cardLayout.show(this, "Race");
     }
 
-    void showLeaderboard(String[][] results) {
+    void showLeaderboard(String[][] results, int earnings) {
         SwingUtilities.invokeLater(() -> {
             leaderboardPanel.updateResults(results);
+            leaderboardPanel.updateNetEarnings(earnings);
             cardLayout.show(this, "Leaderboard");
         });
     }

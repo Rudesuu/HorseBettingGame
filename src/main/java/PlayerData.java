@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public final class PlayerData {
 
     static int euros = 200;
@@ -20,7 +19,7 @@ public final class PlayerData {
 
     private PlayerData() {
     }
-    
+
     void startNewRace(int bettedEuros) {
         if (race != null && race.finishingTime == -1) {
             return;
@@ -49,13 +48,14 @@ public final class PlayerData {
 
         return null;
     }
-    
+
     static class HorseStats {
+
         int wins = 0;
         long fastestTime = -1;
         String convertedFastestTime = "DNF";
     }
-    
+
     private static final Path SAVE_FILE = Path.of("saveData.json");
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
@@ -68,7 +68,7 @@ public final class PlayerData {
 
         Files.writeString(SAVE_FILE, GSON.toJson(data));
     }
-    
+
     public static void load() throws IOException {
         if (!Files.exists(SAVE_FILE)) {
             statsPerHorse.put("White Horse", new HorseStats());
@@ -83,7 +83,9 @@ public final class PlayerData {
                 SaveData.class
         );
 
-        if (data == null) return;
+        if (data == null) {
+            return;
+        }
 
         euros = data.euros;
         if (data.statsPerHorse != null) {
@@ -95,8 +97,9 @@ public final class PlayerData {
             statsPerHorse.put("Diamond Horse", new HorseStats());
         }
     }
-    
+
     private static class SaveData {
+
         int euros;
         Map<String, HorseStats> statsPerHorse;
     }

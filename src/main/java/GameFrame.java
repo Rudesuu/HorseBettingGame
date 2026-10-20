@@ -9,7 +9,7 @@ import javax.swing.KeyStroke;
 public class GameFrame extends JFrame {
 
     static Screen screen;
-    
+
     public GameFrame() {
         setTitle("Horse Betting");
         setSize(1000, 700);
@@ -22,21 +22,22 @@ public class GameFrame extends JFrame {
         setIconImage(icon.getImage());
         screen = new Screen();
         add(screen);
-        
+
         KeyStroke keyStroke = KeyStroke.getKeyStroke(
-            KeyEvent.VK_S,
-            InputEvent.CTRL_DOWN_MASK
+                KeyEvent.VK_S,
+                InputEvent.CTRL_DOWN_MASK
         );
 
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-            .put(keyStroke, "save");
+                .put(keyStroke, "save");
 
         getRootPane().getActionMap().put("save", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     PlayerData.save();
-                } catch (Exception ex) {}
+                } catch (Exception ex) {
+                }
             }
         });
     }
