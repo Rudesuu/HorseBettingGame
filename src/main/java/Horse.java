@@ -29,7 +29,7 @@ public class Horse {
         if (position < 100) {
             return;
         }
-        
+
         finishingTime = currentTime;
     }
 
@@ -38,13 +38,13 @@ public class Horse {
     }
 
     void applyWaterHose() {
+        if (slidOut || finishingTime != -1) {
+            return;
+        }
         Random random = new Random();
         int randomNumber = random.nextInt(100);
 
         if (randomNumber >= chanceToSlideOut) {
-            return;
-        }
-        if (finishingTime != -1) {
             return;
         }
         slidOut = true;
