@@ -9,7 +9,7 @@ import java.util.Map;
 
 public final class PlayerData {
 
-    static int euros = 500;
+    static int euros = 50000;
     static String chosenHorse;
     
     static Map<String, HorseStats> statsPerHorse = new HashMap();
@@ -17,20 +17,6 @@ public final class PlayerData {
     static Race race;
 
     private PlayerData() {
-    }
-
-    void startNewRace(int bettedEuros) {
-        if (race != null && race.finishingTime == -1) {
-            return;
-        }
-        if (bettedEuros > euros) {
-            return;
-        }
-        PlayerData.euros -= bettedEuros;
-
-        race = new Race(bettedEuros);
-
-        race.startRace();
     }
 
     static Horse getHorseObject() {
