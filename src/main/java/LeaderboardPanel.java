@@ -14,7 +14,8 @@ import javax.swing.table.DefaultTableModel;
 public class LeaderboardPanel extends JPanel {
 
     private DefaultTableModel tableModel;
-    private final String[] columns = {"Position", "Horse", "Finish time"};
+    private final String[] columns = {"Position", "Horse", "Finish time",
+        "Fastest time", "Win count"};
     private JLabel netEarningsLabel;
 
     public LeaderboardPanel(Screen screen) {
@@ -25,12 +26,7 @@ public class LeaderboardPanel extends JPanel {
         JLabel leaderboardLabel = new JLabel("Leaderboard", JLabel.CENTER);
         leaderboardLabel.setFont(new Font("Arial", Font.BOLD, 35));
 
-        String[][] results = {
-            {"1st", "Golden horse", "47.07s"},
-            {"2nd", "Black horse", "53.87s"},
-            {"3rd", "White horse", "62.34s"},
-            {"4th", "Diamond horse", "DNF"}
-        };
+        String[][] results = new String[4][5];
 
         tableModel = new DefaultTableModel(results, columns) {
             @Override

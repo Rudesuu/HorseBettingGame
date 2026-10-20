@@ -1,7 +1,7 @@
 
 public final class PlayerData {
 
-    static int euros = 5000;
+    static int euros = 200;
     static String chosenHorse;
 
     static Race race;
