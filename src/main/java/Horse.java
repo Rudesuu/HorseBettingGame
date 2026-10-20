@@ -51,10 +51,10 @@ public class Horse {
     }
 
     static Horse[] createRaceHorses() {
-        Horse whiteHorse = new Horse("White Horse", 10f, 1f, 10);
-        Horse blackHorse = new Horse("Black Horse", 4.1f, 1.5f, 15);
-        Horse goldenHorse = new Horse("Golden Horse", 1.9f, 1.75f, 25);
-        Horse diamondHorse = new Horse("Diamond Horse", 1.1f, 2f, 40);
+        Horse whiteHorse = new Horse("White Horse", 10f, 2f, 10);
+        Horse blackHorse = new Horse("Black Horse", 4.1f, 3f, 15);
+        Horse goldenHorse = new Horse("Golden Horse", 1.9f, 3.5f, 25);
+        Horse diamondHorse = new Horse("Diamond Horse", 1.1f, 4f, 40);
 
         Horse[] horses = new Horse[4];
         horses[0] = whiteHorse;

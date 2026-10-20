@@ -53,7 +53,7 @@ public final class PlayerData {
 
         int wins = 0;
         long fastestTime = -1;
-        String convertedFastestTime = "DNF";
+        String convertedFastestTime = "--:--";
     }
 
     private static final Path SAVE_FILE = Path.of("saveData.json");

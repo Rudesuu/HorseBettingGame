@@ -10,6 +10,7 @@ public class Race {
     static final int WATERHOSE_COST = 125;
 
     int bettedEuros;
+    int boughtForItems = 0;
 
     Horse[] horses;
     long startTime = -1;
@@ -54,6 +55,8 @@ public class Race {
 
     void iteration(long currentTime, double deltaTime) {
         for (Horse horse : horses) {
+            if (horse.slidOut) continue;
+            
             horse.updatePosition(deltaTime);
             horse.updateFinished(currentTime);
         }
@@ -66,12 +69,12 @@ public class Race {
             String[][] results = new String[4][5];
 
             for (int i = 0; i < sortedHorses.length; i++) {
-                String position = Integer.toString(i);
+                String position = Integer.toString(i+1);
 
-                if (i % 100 >= 11 && i % 100 <= 13) {
+                if ((i+1) % 100 >= 11 && (i+1) % 100 <= 13) {
                     position += "th";
                 } else {
-                    switch (i % 10) {
+                    switch ((i+1) % 10) {
                         case 1:
                             position += "st";
                             break;
@@ -92,8 +95,12 @@ public class Race {
 
                 results[i][1] = horse.name;
 
+                PlayerData.HorseStats stats = PlayerData.statsPerHorse.get(horse.name);
+                
                 if (horse.finishingTime == -1) {
                     results[i][2] = "DNF";
+                    results[i][3] = stats.convertedFastestTime;
+                    results[i][4] = Integer.toString(stats.wins);
                     continue;
                 }
 
@@ -107,8 +114,6 @@ public class Race {
                 results[i][2] = convertedDelta;
 
                 // We know that the horse is finished because otherwise we would not have calculated the delta.
-                PlayerData.HorseStats stats = PlayerData.statsPerHorse.get(horse.name);
-
                 if (i == 0) {
                     stats.wins++;
                 }
@@ -160,6 +165,7 @@ public class Race {
         }
         Horse horse = PlayerData.getHorseObject();
         PlayerData.euros -= CARROT_COST;
+        boughtForItems += CARROT_COST;
         horse.applyCarrotSpeedBoost();
     }
 
@@ -168,6 +174,7 @@ public class Race {
             return;
         }
         PlayerData.euros -= WATERHOSE_COST;
+        boughtForItems += WATERHOSE_COST;
         applyWaterHose();
     }
 
@@ -193,10 +200,11 @@ public class Race {
 
     float givePayout(Horse firstHorse) {
         float earnings = 0;
-        if (firstHorse == PlayerData.getHorseObject() && finishingTime != -2) {
-            earnings = bettedEuros * PlayerData.getHorseObject().payout;
+        Horse playersHorse = PlayerData.getHorseObject();
+        if (firstHorse == playersHorse && finishingTime != -2) {
+            earnings = bettedEuros * playersHorse.payout;
             PlayerData.euros += earnings;
         }
-        return earnings - bettedEuros;
+        return earnings - bettedEuros - boughtForItems;
     }
 }
