@@ -5,6 +5,7 @@ public class HorseBetting {
         try {
             PlayerData.load();
         } catch (Exception e) {
+            // Intentionally ignored
         }
 
         GameFrame frame = new GameFrame();

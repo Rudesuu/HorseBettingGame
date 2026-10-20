@@ -55,8 +55,10 @@ public class Race {
 
     void iteration(long currentTime, double deltaTime) {
         for (Horse horse : horses) {
-            if (horse.slidOut) continue;
-            
+            if (horse.slidOut) {
+                continue;
+            }
+
             horse.updatePosition(deltaTime);
             horse.updateFinished(currentTime);
         }
@@ -69,12 +71,12 @@ public class Race {
             String[][] results = new String[4][5];
 
             for (int i = 0; i < sortedHorses.length; i++) {
-                String position = Integer.toString(i+1);
+                String position = Integer.toString(i + 1);
 
-                if ((i+1) % 100 >= 11 && (i+1) % 100 <= 13) {
+                if ((i + 1) % 100 >= 11 && (i + 1) % 100 <= 13) {
                     position += "th";
                 } else {
-                    switch ((i+1) % 10) {
+                    switch ((i + 1) % 10) {
                         case 1:
                             position += "st";
                             break;
@@ -96,7 +98,7 @@ public class Race {
                 results[i][1] = horse.name;
 
                 PlayerData.HorseStats stats = PlayerData.statsPerHorse.get(horse.name);
-                
+
                 if (horse.finishingTime == -1) {
                     results[i][2] = "DNF";
                     results[i][3] = stats.convertedFastestTime;
@@ -113,7 +115,6 @@ public class Race {
                 String convertedDelta = "%02d:%02d".formatted(minutes, seconds);
                 results[i][2] = convertedDelta;
 
-                // We know that the horse is finished because otherwise we would not have calculated the delta.
                 if (i == 0) {
                     stats.wins++;
                 }
@@ -126,7 +127,7 @@ public class Race {
                 results[i][3] = stats.convertedFastestTime;
                 results[i][4] = Integer.toString(stats.wins);
             }
-            
+
             GameFrame.screen.showLeaderboard(results, (int) givePayout(sortedHorses[0]));
         }
     }

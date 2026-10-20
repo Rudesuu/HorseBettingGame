@@ -37,6 +37,7 @@ public class GameFrame extends JFrame {
                 try {
                     PlayerData.save();
                 } catch (Exception ex) {
+                    // Intentionally ignored
                 }
             }
         });
